@@ -1,14 +1,14 @@
 Quintus.GameBackgrounds = function(Q){
 	
-		
-	var backgrounds = ["background.png"];
-	var middle = ["backgroundMiddle.png"];
-	var foregrounds = ["backgroundFront.png"];
+	var farBehind = ["backgroundLayer4.png"];
+	var backgrounds = ["backgroundLayer3.png"];
+	var middle = ["backgroundLayer2.png"];
+	var foregrounds = ["backgroundLayer1.png"];
 	var testItems = ["testitems.png"];
 	
 	//var backgroundSpeed = -500/3;
 	var SPRITE_BOX = 1;
-	
+	var farBehindParallaxSpeed = 0.90;
 	var backgroundParallaxSpeed = 0.95;
 	var foregroundParallaxSpeed = 1.05;
 	
@@ -16,6 +16,7 @@ Quintus.GameBackgrounds = function(Q){
 	Q.addMap = function(player){
 		
 		var stage = Q.stage(0);
+		addFarBehind(stage);
 		addBackgrounds(stage);
 		stage.insert(player);
 		Q.addItems();
@@ -54,7 +55,14 @@ Quintus.GameBackgrounds = function(Q){
 	
 	});
 	
-	
+	function addFarBehind(stage){
+		for(var i = 0; i < backgrounds.length; i++){	
+			var item = new Q.BG({asset : farBehind[i],vx : farBehindParallaxSpeed });
+			
+			item.p.x += item.p.w*i;
+			stage.insert(item);
+		}
+	}
 	function addBackgrounds(stage){
 		for(var i = 0; i < backgrounds.length; i++){	
 			var item = new Q.BG({asset : backgrounds[i],vx : backgroundParallaxSpeed });

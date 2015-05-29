@@ -86,7 +86,7 @@ Q.GameObject.extend("BoxThrower",{
 
 Parse.initialize("Ey61uM5w7LgMBbMuZxyHmbZJAowvgELIb1OW68YU", "V7Si7JS1Z52cQHXm8i4fWH3gWaVvH9KhfeBvpQiR");
 
-Q.load("spotify.png, background.png, backgroundMiddle.png, backgroundFront.png, crate.png, stars.png,stars.json, player.png, player.json, bg1.png, bg1_old.png, fg1.png, fg2.png", function() {
+Q.load("spotify.png, crate.png, stars.png,stars.json, player.png, player.json, backgroundLayer1.png,backgroundLayer2.png,backgroundLayer3.png, backgroundLayer4.png", function() {
     Q.compileSheets("player.png","player.json");
 	Q.compileSheets("stars.png","stars.json");
 
