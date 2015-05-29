@@ -93,8 +93,10 @@ Quintus.GamePlayer = function(Q){
 		else if(this.p.landed) {
 			this.play("walk_right");
 			
-		} else {
-		  this.play("jump_right");
+		} else if(this.p.vy < 0){
+			this.play("jump_up");
+		} else{
+			this.play("jump_down");
 		}
 	
   }

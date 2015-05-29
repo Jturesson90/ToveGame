@@ -89,7 +89,7 @@ Parse.initialize("Ey61uM5w7LgMBbMuZxyHmbZJAowvgELIb1OW68YU", "V7Si7JS1Z52cQHXm8i
 Q.load("spotify.png, background.png, backgroundMiddle.png, backgroundFront.png, crate.png, stars.png,stars.json, player.png, player.json, bg1.png, bg1_old.png, fg1.png, fg2.png", function() {
     Q.compileSheets("player.png","player.json");
 	Q.compileSheets("stars.png","stars.json");
-	//Q.compileSheets("background.png, background.json,");
+
 	 Q.animations("stars", {
       blink: { frames: [0,1], rate: 1/3, flip: false, loop: true }
     });
@@ -97,7 +97,8 @@ Q.load("spotify.png, background.png, backgroundMiddle.png, backgroundFront.png, 
     Q.animations("player", {
       walk_right: { frames: [0,1,2,3], rate: 0.30, flip: false, loop: true },
 	  waiting : { frames: [0], rate: 1, flip: false, loop: true },
-      jump_right: { frames: [3], rate: 1/10, flip: false },
+      jump_up : { frames: [4], rate: 1/10, flip: false },
+	  jump_down : { frames: [5], rate: 1/10, flip: false }
     });
     Q.stageScene("level1");
 	Q.stageScene("spotify",2);
