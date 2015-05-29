@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		
+		<meta name=viewport content="width=device-width, initial-scale=1">
+		<title>Bear run</title>
+	
+		<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+		<!--<script src='http://cdn.html5quintus.com/v0.2.0/quintus-all.js'></script> -->
+
+		<script src='lib/quintus.js'></script>
+		<script src='lib/quintus_2d.js'></script>
+		<script src='lib/quintus_anim.js'></script>
+		<script src='lib/quintus_audio.js'></script>
+		<script src='lib/quintus_input.js'></script>
+		<script src='lib/quintus_scenes.js'></script>
+		<script src='lib/quintus_sprites.js'></script>
+		<script src='lib/quintus_tmx.js'></script>
+		<script src='lib/quintus_touch.js'></script>
+		<script src='lib/quintus_ui.js'></script>
+
+		<script src='scripts/main.js'></script>
+		<script src='scripts/player.js'></script>
+		<script src='scripts/scenes.js'></script>
+		<script src='scripts/backgrounds.js'></script>
+		<script src='scripts/items.js'></script>
+		<script src='scripts/ui.js'></script>
+		
+		<div id="fb-root"></div>
+		<script>
+		  window.fbAsyncInit = function() {
+			FB.init({
+			  appId      : '758411534272782',
+			  xfbml      : true,
+			  version    : 'v2.3'
+			});
+		  };
+
+		  (function(d, s, id){
+			 var js, fjs = d.getElementsByTagName(s)[0];
+			 if (d.getElementById(id)) {return;}
+			 js = d.createElement(s); js.id = id;
+			 js.src = "//connect.facebook.net/en_US/sdk.js";
+			 fjs.parentNode.insertBefore(js, fjs);
+		   }(document, 'script', 'facebook-jssdk'));
+		</script>
+		<style> 
+		  body { padding:0px; margin:0px; } 
+		</style>
+	</head>
+	<body>
+
+	</body>
+</html>

@@ -1,0 +1,31 @@
+{ background0: {
+      sx: 0,
+      sy: 0,
+      w: 2880,
+      h: 1000
+  },
+  background1: {
+      sx: 2880,
+      sy: 0,
+      w: 2880,
+      h: 1000
+  },
+  background2: {
+      sx: 5776,
+      sy: 0,
+      w: 2880,
+      h: 1000
+  },
+  background3: {
+      sx: 8664,
+      sy: 0,
+	  w: 2880,
+      h: 1000
+  },
+  background4: {
+      sx: 11552,
+      sy: 0,
+      w: 2880,
+      h: 1000
+  }
+}
