@@ -15,83 +15,45 @@ var Q = window.Q = Quintus()
 
 var gameSpeed = -500;
 var firstGameSpeed = gameSpeed;
-Q.Sprite.extend("Box",{
-  init: function() {
 
-    var levels = [ 565, 540, 500, 450 ];
+/*
+*Define world height. The height of the backgrounds. Defined for easier scaling
+*/
+Q.worldHeight = Q.touchDevice ? 1000 : 1000;
+Q.worldWidth = Q.touchDevice ? 15200*3 : 15200*3;
 
-    var player = Q("Player").first();
-    this._super({
-      x: player.p.x + Q.width + 50,
-      y: levels[Math.floor(Math.random() * 3)],
-      frame: Math.random() < 0.5 ? 1 : 0,
-      scale: 2,
-      type: SPRITE_BOX,
-      sheet: "crates",
-      vx: -600 + 200 * Math.random(),
-      vy: 0,
-      ay: 0,
-      theta: (300 * Math.random() + 200) * (Math.random() < 0.5 ? 1 : -1)
-    });
-
-
-    this.on("hit");
-  },
-
-  step: function(dt) {
-    this.p.x += this.p.vx * dt;
-
-
-    this.p.vy += this.p.ay * dt;
-    this.p.y += this.p.vy * dt;
-    if(this.p.y != 565) {
-      this.p.angle += this.p.theta * dt;
-    }
-
-    if(this.p.y > 800) { this.destroy(); }
-
-  },
-
-  hit: function() {
-    this.p.type = 0;
-    this.p.collisionMask = Q.SPRITE_NONE;
-    this.p.vx = 200;
-    this.p.ay = 400;
-    this.p.vy = -300;
-    this.p.opacity = 0.5;
-  }
-  
-
-});
-
-Q.GameObject.extend("BoxThrower",{
-  init: function() {
-    this.p = {
-      launchDelay: 0.75,
-      launchRandom: 1,
-      launch: 2
-    }
-  },
-
-  update: function(dt) {
-    this.p.launch -= dt;
-
-    if(this.p.launch < 0) {
-      this.stage.insert(new Q.Box());
-      this.p.launch = this.p.launchDelay + this.p.launchRandom * Math.random();
-    }
-  }
-
-});
 
 Parse.initialize("Ey61uM5w7LgMBbMuZxyHmbZJAowvgELIb1OW68YU", "V7Si7JS1Z52cQHXm8i4fWH3gWaVvH9KhfeBvpQiR");
-
-Q.load("spotify.png, crate.png, stars.png,stars.json, player.png, player.json, backgroundLayer1.png,backgroundLayer2.png,backgroundLayer3.png, backgroundLayer4.png", function() {
-    Q.compileSheets("player.png","player.json");
+var backgrounds = "backgroundLayer1.png,backgroundLayer2.png,backgroundLayer3.png, backgroundLayer4.png, backgroundLayer1-2.png,backgroundLayer2-2.png,backgroundLayer3-2.png, backgroundLayer4-2.png,backgroundLayer1-3.png,backgroundLayer2-3.png,backgroundLayer3-3.png, backgroundLayer4-3.png";
+Q.load("walker.png, walker.json, bird.png,bird.json ,spider.png,spider.json, spotify.png, stars.png,stars.json, player.png, player.json, "+backgrounds, function() {
+    
+	//Compile spriteSheets
+	Q.compileSheets("walker.png","walker.json");
+	Q.compileSheets("player.png","player.json");
 	Q.compileSheets("stars.png","stars.json");
-
-	 Q.animations("stars", {
-      blink: { frames: [0,1], rate: 1/3, flip: false, loop: true }
+	Q.compileSheets("spider.png","spider.json");
+	Q.compileSheets("bird.png","bird.json");
+	
+	
+	Q.animations("walker", {
+		idle: { frames: [0], rate: 0.25, flip: false, loop: false },
+		walking: { frames: [1,2,3,4,0], rate: 0.25, flip: false, loop: true }
+		 
+    });
+	
+	Q.animations("bird", {
+		idle: { frames: [0], rate: 0.25, flip: false, loop: false },
+		fly: { frames: [0,2,1,3], rate: 0.25, flip: false, loop: true }
+		 
+    });
+	Q.animations("spider", {
+		idle: { frames: [0], rate: 0.30, flip: false, loop: false },
+		walking: { frames: [0,1,4,5,8,9], rate: 0.30, flip: false, loop: true },
+		exploding: { frames: [2,6,3,10,7,11,12,14,13], rate: 0.30, flip: false, loop: false, trigger: "explosion_done" }
+    });
+	
+	Q.animations("stars", {
+      blink: { frames: [0,1,2,3], rate: 1/3, flip: false, loop: true }
     });
    
     Q.animations("player", {
@@ -105,7 +67,7 @@ Q.load("spotify.png, crate.png, stars.png,stars.json, player.png, player.json, b
   
 });
 
-
+//Touch listeners
 Q.el.addEventListener('touchstart',function(e) {
 		if(!Q.isRunning()){
 				Q.stageScene("gameHUD",1);
@@ -143,10 +105,9 @@ Q.el.addEventListener('touchend',function(e) {
 	 gameSpeed = firstGameSpeed;
  }
  Q.slowDownEffect = function(){
-	console.log('before');
 	Q.setGameSpeed(gameSpeed/3);
 	setTimeout(function(){
-		console.log('after');
+	
 		Q.setGameSpeed(firstGameSpeed);
 	},500);
  }

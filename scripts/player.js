@@ -1,4 +1,5 @@
 Quintus.GamePlayer = function(Q){
+	//Ground is at 282 when at 1000
 	var ground = 282;
 	var highestJump = 40;
 	var doubleJump = false;
@@ -9,22 +10,26 @@ Quintus.GamePlayer = function(Q){
 	Q.Sprite.extend("Player",{
 
 		init: function(p) {
+			ground = 282 * Q.worldHeight/1000;
 		
+		// We want the player to be 60px high when the background is 1000px high. For scaling to the world I'm scaling it: worldHeight / wanted height when it's 1000px high / picture size.
 			this._super(p,{
 				  sheet: "player",
 				  sprite: "player",
-				  z: 100,
+				
 				  color: "red",
 				  y:ground,
-				  sort: true,
+				
 				  x:0,
 				  isJumping : false,
-				  scale: 0.306,
+				 
+				  scale: (Q.worldHeight/(1000/60))/196,
 				  speed: 500,
 				  jump: -700,
 				  secondJump: -542
 				  
 			});
+			console.log(this.p.scale);
 			//this.p.secondJump = this.p.jump /2;
 			dontJumpFirstTime = true;
 			Q.gravityY = gravity;

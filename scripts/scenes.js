@@ -3,25 +3,33 @@ Quintus.GameScenes = function(Q){
 	var gameScore = new Player();
 	var PLAYER_SCORE = 0;
 	var toveUrl = "https://open.spotify.com/user/tovestyrkeofficial/playlist/5pz7UkmtznuzI6n7Xx0LIu";
-	var cameraYOffset = 100;
-	var cameraYScale = 500;
-
+	var cameraYOffset;
+	var cameraYScale;
+	//218 is the constant when background height is 1000.
+	var cameraYConstant = 218;
+	
+	
+	
 	 //If device, use: Q.touchDevice;
 	Q.scene("level1",function(stage) {
-				
+			cameraYOffset = Q.worldHeight*0.1;
+			cameraYScale = Q.worldHeight*0.5;
+			cameraYConstant *= Q.worldHeight/1000;
 			var player = new Q.Player();			
 			Q.addMap(player);
 			
-			var bg1 = new Q.BG({asset : "background.png",vx : 1.0 });
-			stage.add("viewport");
-			stage.viewport.scale = Q.height/(bg1.p.h-cameraYScale);
-			stage.viewport.offsetY = 218-Q.height*0.5/stage.viewport.scale+cameraYScale/2-cameraYOffset;
-			stage.moveTo((player.p.x - Q.width*0.25)/stage.viewport.scale, 218-Q.height*0.5/stage.viewport.scale+cameraYScale/2-cameraYOffset);//0-Q.height*0.5/stage.viewport.scale+cameraYScale/2-cameraYOffset);//  0-Q.height/2);
-			stage.follow(player,{ x:false,y:true });
 			
+			
+			stage.add("viewport");
+			stage.viewport.scale = Q.height/((Q.worldHeight)-cameraYScale);
+			
+			var cameraXPos = (player.p.x - Q.width*0.25)/stage.viewport.scale;
+			var cameraYPos = cameraYConstant-Q.height*0.5/stage.viewport.scale+cameraYScale/2-cameraYOffset;
+			
+			stage.moveTo(cameraXPos, cameraYPos);
+			stage.follow(player,{ x:false,y:true });
+			stage.viewport.offsetY = cameraYPos;
 			Q.stageScene("gameIntro",1);
-			//Q.stageScene("gameHUD",1);
-		
 		
 		 
 	});
