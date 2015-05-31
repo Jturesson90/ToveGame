@@ -206,7 +206,7 @@ Quintus.InteractiveItems = function(Q){
 		this.on("bump.top",this,"hitup");
 		this.on("bump.left",this,"hitleft");
 		this.on("bump.bottom",this,"hitleft");
-		Q.debug = true;
+	
 		console.log("New walker   "+this.p.x+"  ,   "+this.p.y);
 		},
 		step: function(dt) {
